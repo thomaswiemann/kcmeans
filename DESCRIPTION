@@ -8,7 +8,7 @@ Description: Implementation of the KCMeans regression estimator studied by
     Wiemann (2023).
 License: GPL (>= 3)
 URL: https://github.com/thomaswiemann/kcmeans
-BugReports: 
+BugReports: https://github.com/thomaswiemann/kcmeans/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -16,6 +16,7 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.6)
 Imports: 
+    stats,
     Ckmeans.1d.dp,
     MASS,
     Matrix

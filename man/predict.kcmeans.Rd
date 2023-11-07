@@ -14,6 +14,8 @@ to the categorical predictor.}
 
 \item{clusters}{A boolean indicating whether estimated clusters should be
 returned.}
+
+\item{...}{Currently unused.}
 }
 \value{
 A numerical vector with predicted values (if \code{clusters = FALSE})

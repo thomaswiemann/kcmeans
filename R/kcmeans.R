@@ -53,7 +53,7 @@ kcmeans <- function(y, X, K = 2) {
     X <- X[, -1, drop = FALSE] # additional features
     # Compute \pi and residualize y
     nX <- ncol(X)
-    Z_mat <- model.matrix(~ 0 + as.factor(Z))
+    Z_mat <- stats::model.matrix(~ 0 + as.factor(Z))
     ols_fit <- ols(y, cbind(X, Z_mat)) # ols w/ generalized inverse
     pi <- ols_fit$coef[1:nX]
     y <- y - X %*% pi
@@ -91,6 +91,7 @@ kcmeans <- function(y, X, K = 2) {
 #'     to the categorical predictor.
 #' @param clusters A boolean indicating whether estimated clusters should be
 #'     returned.
+#' @param ... Currently unused.
 #'
 #' @return A numerical vector with predicted values (if \code{clusters = FALSE})
 #'     or predicted clusters (if \code{clusters = FALSE}).
