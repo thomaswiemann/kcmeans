@@ -1,0 +1,24 @@
+Package: toys
+Title: A toy package
+Version: 0.0.0.9000
+Date: 2023-10-24
+Authors@R: c(
+    person("Thomas", "Wiemann", role = c("aut", "cre"), email = "wiemann@uchicago.edu"))
+Description: Just a toy packge.
+License: GPL (>= 3)
+URL: 
+BugReports: 
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 3.6)
+Imports: 
+Suggests: 
+    testthat (>= 3.0.0),
+    covr,
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr
