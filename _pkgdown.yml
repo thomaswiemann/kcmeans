@@ -31,7 +31,10 @@ reference:
 - title: Functions
   contents:
   - kcmeans
-  - matches("summary")
+  - matches("predict")
 - title: Dataset
   contents:
   - SimDat
+- title: internal
+  contents:
+  - ols
