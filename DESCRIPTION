@@ -1,12 +1,13 @@
-Package: toys
-Title: A toy package
+Package: kcmeans
+Title: Conditional Expectation Function Estimation with K-Conditional-Means
 Version: 0.0.0.9000
-Date: 2023-10-24
+Date: 2023-10-27
 Authors@R: c(
     person("Thomas", "Wiemann", role = c("aut", "cre"), email = "wiemann@uchicago.edu"))
-Description: Just a toy packge.
+Description: Implementation of the KCMeans regression estimator studied by 
+    Wiemann (2023).
 License: GPL (>= 3)
-URL: 
+URL: https://github.com/thomaswiemann/kcmeans
 BugReports: 
 Encoding: UTF-8
 LazyData: true
@@ -15,6 +16,9 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.6)
 Imports: 
+    Ckmeans.1d.dp,
+    MASS,
+    Matrix
 Suggests: 
     testthat (>= 3.0.0),
     covr,

@@ -1,6 +1,6 @@
 ---
 title: "Get Started"
-description: "A brief introduction to toys."
+description: "A brief introduction to kcmeans."
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get Started}

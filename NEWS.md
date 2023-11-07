@@ -1,3 +1,3 @@
-# toys 0.0.0.9000
+# kcmeans 0.0.0.9000
 
-* Inital development version.
+* Initial development version.

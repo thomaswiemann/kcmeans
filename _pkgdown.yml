@@ -1,0 +1,37 @@
+url: https://www.thomaswiemann.com/kcmeans
+
+template:
+  bootstrap: 5
+
+home:
+  title: Conditional Expectation Function Estimation with K-Conditional-Means
+  description: Implementation of the KCMeans regression estimator studied by
+    Wiemann (2023).
+  sidebar:
+    structure:
+    - links
+    - license
+    - citation
+    - authors
+    - dev
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - search
+    - github
+
+reference:
+- title: Functions
+  contents:
+  - kcmeans
+  - matches("summary")
+- title: Dataset
+  contents:
+  - SimDat
