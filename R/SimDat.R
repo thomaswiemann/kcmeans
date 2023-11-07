@@ -9,7 +9,7 @@
 #'       predictor.}
 #'   \item{Z}{The (in practice observed) higher-dimensional categorical
 #'       predictor.}
-#'   \item{X}{A binary control variable.}
+#'   \item{X1,X2}{Additional standard normal predictors.}
 #' }
 #'
 #' @references

@@ -35,6 +35,3 @@ reference:
 - title: Dataset
   contents:
   - SimDat
-- title: internal
-  contents:
-  - ols

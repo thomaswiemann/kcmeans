@@ -1,4 +1,4 @@
 library(testthat)
-library(toys)
+library(kcmeans)
 
-test_check("toys")
+test_check("kcmeans")

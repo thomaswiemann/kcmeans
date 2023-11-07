@@ -1,5 +1,5 @@
-#' Ordinary least squares with generalized inverse from the ddml package
-#' See ?ddml::ols
+# Ordinary least squares with generalized inverse from the ddml package
+# See ?ddml::ols
 ols <- function(y, X,
                 const = FALSE,
                 w = NULL) {
