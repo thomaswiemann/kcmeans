@@ -14,7 +14,7 @@ coverage:
         informational: true
 
 codecov:
- token: YOUR-TOKEN-GOES-HERE
+ token: ${{ secrets.CODECOV_TOKEN }}
 
 language: R
 
