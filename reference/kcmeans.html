@@ -61,7 +61,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">kcmeans</span><span class="op">(</span><span class="va">y</span>, <span class="va">X</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">kcmeans</span><span class="op">(</span><span class="va">y</span>, <span class="va">X</span>, which_is_cat <span class="op">=</span> <span class="fl">1</span>, K <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,8 +71,13 @@
 
 
 <dt>X</dt>
-<dd><p>A (sparse) feature matrix where the first column corresponds to
-the categorical predictor.</p></dd>
+<dd><p>A (sparse) feature matrix where one column is the categorical
+predictor.</p></dd>
+
+
+<dt>which_is_cat</dt>
+<dd><p>An integer indicating which column of <code>X</code>
+corresponds to the categorical predictor.</p></dd>
 
 
 <dt>K</dt>
@@ -104,6 +109,10 @@ points.</p></dd>
 <dd><p>The best linear prediction coefficients of \(Y\)
 on \(X\) corresponding to the non-categorical predictors
 \(X_{2:}\).</p></dd>
+
+<dt><code>which_is_cat</code>,<code>K</code></dt>
+<dd><p>Passthrough of user-provided
+arguments. See above for details.</p></dd>
 
 
 </dl></div>
