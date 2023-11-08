@@ -5,7 +5,7 @@ test_that("kcmenas computes", {
   # Compute kcmeans
   kcmeans_fit <- kcmeans(y, X, K = 3)
   # Check output with expectations
-  expect_equal(length(kcmeans_fit), 3)
+  expect_equal(length(kcmeans_fit), 5)
 })#TEST_THAT
 
 test_that("kcmenas computes with additional controls", {
@@ -15,7 +15,7 @@ test_that("kcmenas computes with additional controls", {
   # Compute kcmeans
   kcmeans_fit <- kcmeans(y, X, K = 3)
   # Check output with expectations
-  expect_equal(length(kcmeans_fit), 3)
+  expect_equal(length(kcmeans_fit), 5)
 })#TEST_THAT
 
 test_that("predict.kcmenas computes w/ unseen categories", {

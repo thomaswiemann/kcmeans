@@ -4,13 +4,16 @@
 \alias{kcmeans}
 \title{K-Conditional-Means Estimator}
 \usage{
-kcmeans(y, X, K = 2)
+kcmeans(y, X, which_is_cat = 1, K = 2)
 }
 \arguments{
 \item{y}{The outcome variable, a numerical vector.}
 
-\item{X}{A (sparse) feature matrix where the first column corresponds to
-the categorical predictor.}
+\item{X}{A (sparse) feature matrix where one column is the categorical
+predictor.}
+
+\item{which_is_cat}{An integer indicating which column of \code{X}
+corresponds to the categorical predictor.}
 
 \item{K}{The number of support points, an integer greater than 2.}
 }
@@ -33,6 +36,8 @@ points.}
 \item{\code{pi}}{The best linear prediction coefficients of \eqn{Y}
 on \eqn{X} corresponding to the non-categorical predictors
 \eqn{X_{2:}}.}
+\item{\code{which_is_cat},\code{K}}{Passthrough of user-provided
+arguments. See above for details.}
 }
 }
 \description{

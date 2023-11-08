@@ -3,8 +3,10 @@
 #' @description Implementation of the K-Conditional-Means estimator.
 #'
 #' @param y The outcome variable, a numerical vector.
-#' @param X A (sparse) feature matrix where the first column corresponds to
-#'     the categorical predictor.
+#' @param X A (sparse) feature matrix where one column is the categorical
+#'     predictor.
+#' @param which_is_cat An integer indicating which column of \code{X}
+#'     corresponds to the categorical predictor.
 #' @param K The number of support points, an integer greater than 2.
 #'
 #' @return \code{kcmeans} returns an object of S3 class \code{kcmeans}. An
@@ -25,6 +27,8 @@
 #'         \item{\code{pi}}{The best linear prediction coefficients of \eqn{Y}
 #'             on \eqn{X} corresponding to the non-categorical predictors
 #'             \eqn{X_{2:}}.}
+#'         \item{\code{which_is_cat},\code{K}}{Passthrough of user-provided
+#'             arguments. See above for details.}
 #'     }
 #'
 #' @references
@@ -44,13 +48,13 @@
 #' kcmeans_fit <- kcmeans(y, X, K = 3)
 #' # Print the estimated support points of the categorical predictor
 #' print(unique(kcmeans_fit$cluster_map[, "mean_xK"]))
-kcmeans <- function(y, X, K = 2) {
+kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
   # Data parameters
   nobs <- length(y)
   # Check whether additional features are included, residualize accordingly
   if (length(X) > nobs) {
-    Z <- X[, 1] # categorical variable
-    X <- X[, -1, drop = FALSE] # additional features
+    Z <- X[, which_is_cat] # categorical variable
+    X <- X[, -which_is_cat, drop = FALSE] # additional features
     # Compute \pi and residualize y
     nX <- ncol(X)
     Z_mat <- stats::model.matrix(~ 0 + as.factor(Z))
@@ -77,7 +81,8 @@ kcmeans <- function(y, X, K = 2) {
   mean_y <- mean(y)
   # Prepare and return the model fit object
   mdl_fit <- list(cluster_map = cluster_map,
-                  mean_y = mean_y, pi = pi)
+                  mean_y = mean_y, pi = pi,
+                  which_is_cat = which_is_cat, K = K)
   class(mdl_fit) <- "kcmeans" # define S3 class
   return(mdl_fit)
 }#kcmeans
@@ -115,8 +120,8 @@ kcmeans <- function(y, X, K = 2) {
 predict.kcmeans <- function(object, newdata, clusters = FALSE, ...) {
   # Check whether additional features are included, compute X\pi if needed
   if (!is.null(object$pi)) {
-    Z <- newdata[, 1]
-    X <- newdata[, -1, drop = FALSE]
+    Z <- newdata[, object$which_is_cat]
+    X <- newdata[, -object$which_is_cat, drop = FALSE]
     if(!clusters) Xpi <- X %*% object$pi
   } else {
     Z <- newdata
