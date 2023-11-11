@@ -6,8 +6,25 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/thomaswiemann/kcmeans/branch/main/graph/badge.svg?token=PHB9W2TJ6S)](https://app.codecov.io/gh/thomaswiemann/kcmeans)
+[![codecov](https://codecov.io/gh/thomaswiemann/kcmeans/graph/badge.svg?token=1U0XDRMKEP)](https://codecov.io/gh/thomaswiemann/kcmeans)
 [![CodeFactor](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans/badge)](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans)
 <!-- badges: end -->
 
-something.
+`kcmeans` is an implementation of the K-Conditional-Means (KCMeans)
+regression estimator analyzed by Wiemann (2023). Implementation
+leverages the unconditional KMeans implementation in one dimension using
+dynamic programming of the
+[`Ckmeans.1d.dp`](https://cran.r-project.org/web/packages/Ckmeans.1d.dp/index.html)
+package.
+
+## Installation
+
+Install the latest development version from GitHub (requires
+[devtools](https://github.com/r-lib/devtools) package):
+
+``` r
+if (!require("devtools")) {
+  install.packages("devtools")
+}
+devtools::install_github("thomaswiemann/kcmeans", dependencies = TRUE)
+```
