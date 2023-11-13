@@ -127,8 +127,14 @@ predict.kcmeans <- function(object, newdata, clusters = FALSE, ...) {
     Z <- newdata
     Xpi <- 0
   }#IFELSE
+  # Generate row-indices
+  nobs <- length(Z)
+  indx <- 1:nobs
   # Construct fitted values from cluster map
-  fitted_mat <- merge(Z, object$cluster_map, by.x = 1, by.y = 1, all.x = TRUE)
+  fitted_mat <- merge(cbind(indx, Z), object$cluster_map,
+                      by.x = 2, by.y = 1, all.x = TRUE)
+  # Re-order by row-indices
+  fitted_mat <- fitted_mat[order(fitted_mat[, 2]), -2]
   # Construct predictions
   if (clusters) {
     # Return estimated cluster assignment
