@@ -27,8 +27,8 @@
 #'         \item{\code{pi}}{The best linear prediction coefficients of \eqn{Y}
 #'             on \eqn{X} corresponding to the non-categorical predictors
 #'             \eqn{X_{2:}}.}
-#'         \item{\code{which_is_cat},\code{K}}{Passthrough of user-provided
-#'             arguments. See above for details.}
+#'         \item{\code{which_is_cat},\code{K}}{Passthrough of
+#'             user-provided arguments. See above for details.}
 #'     }
 #'
 #' @references
@@ -41,11 +41,13 @@
 #' @export
 #'
 #' @examples
-#' # Use data from the included simulated dataset
-#' y <- SimDat$y
-#' X <- cbind(SimDat$Z, SimDat$X) # first feature is the categorical predictor.
-#' # Compute kcmeans with three support points
-#' kcmeans_fit <- kcmeans(y, X, K = 3)
+#' # Simulate simple dataset with n=800 observations
+#' X <- rnorm(800) # continuous predictor
+#' Z <- sample(1:20, 800, replace = T) # categorical predictor
+#' Z0 <- Z %% 4 # lower-dimensional latent categorical variable
+#' y <- Z0 + X + rnorm(800) # outcome
+#' # Compute kcmeans with four support points
+#' kcmeans_fit <- kcmeans(y, cbind(Z, X), K = 4)
 #' # Print the estimated support points of the categorical predictor
 #' print(unique(kcmeans_fit$cluster_map[, "mean_xK"]))
 kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
@@ -80,9 +82,11 @@ kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
   # Compute the unconditional mean
   mean_y <- mean(y)
   # Prepare and return the model fit object
+  X = cbind(X[, 1:which_is_cat])
   mdl_fit <- list(cluster_map = cluster_map,
                   mean_y = mean_y, pi = pi,
-                  which_is_cat = which_is_cat, K = K)
+                  which_is_cat = which_is_cat,
+                  K = K)
   class(mdl_fit) <- "kcmeans" # define S3 class
   return(mdl_fit)
 }#kcmeans
@@ -107,15 +111,17 @@ kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
 #' @export
 #'
 #' @examples
-#' # Use data from the included simulated dataset
-#' y <- SimDat$y
-#' X <- cbind(SimDat$Z, SimDat$X1, SimDat$X2) # first feature is categorical
-#' # Compute kcmeans with three support points
-#' kcmeans_fit <- kcmeans(y, X, K = 3)
+#' # Simulate simple dataset with n=800 observations
+#' X <- rnorm(800) # continuous predictor
+#' Z <- sample(1:20, 800, replace = T) # categorical predictor
+#' Z0 <- Z %% 4 # lower-dimensional latent categorical variable
+#' y <- Z0 + X + rnorm(800) # outcome
+#' # Compute kcmeans with four support points
+#' kcmeans_fit <- kcmeans(y, cbind(Z, X), K = 4)
 #' # Calculate in-sample predictions
-#' fitted_values <- predict(kcmeans_fit, X)
+#' fitted_values <- predict(kcmeans_fit, cbind(Z, X))
 #' # Print sample share of estimated clusters
-#' clusters <- predict(kcmeans_fit, X, clusters = TRUE)
+#' clusters <- predict(kcmeans_fit, cbind(Z, X), clusters = TRUE)
 #' table(clusters)
 predict.kcmeans <- function(object, newdata, clusters = FALSE, ...) {
   # Check whether additional features are included, compute X\pi if needed

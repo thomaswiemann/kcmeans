@@ -25,15 +25,17 @@ or predicted clusters (if \code{clusters = FALSE}).
 Prediction method for the K-Conditional-Means estimator.
 }
 \examples{
-# Use data from the included simulated dataset
-y <- SimDat$y
-X <- cbind(SimDat$Z, SimDat$X1, SimDat$X2) # first feature is categorical
-# Compute kcmeans with three support points
-kcmeans_fit <- kcmeans(y, X, K = 3)
+# Simulate simple dataset with n=800 observations
+X <- rnorm(800) # continuous predictor
+Z <- sample(1:20, 800, replace = T) # categorical predictor
+Z0 <- Z \%\% 4 # lower-dimensional latent categorical variable
+y <- Z0 + X + rnorm(800) # outcome
+# Compute kcmeans with four support points
+kcmeans_fit <- kcmeans(y, cbind(Z, X), K = 4)
 # Calculate in-sample predictions
-fitted_values <- predict(kcmeans_fit, X)
+fitted_values <- predict(kcmeans_fit, cbind(Z, X))
 # Print sample share of estimated clusters
-clusters <- predict(kcmeans_fit, X, clusters = TRUE)
+clusters <- predict(kcmeans_fit, cbind(Z, X), clusters = TRUE)
 table(clusters)
 }
 \references{

@@ -9,7 +9,8 @@
 ^pkgdown$
 ^doc$
 ^Meta$
-^vignettes/articles$
+^vignettes/precompile.R$
+^vignettes/kcmeans.Rmd.txt$
 ^README.Rmd$
 ^cran-comments\.md$
 ^.envrc$

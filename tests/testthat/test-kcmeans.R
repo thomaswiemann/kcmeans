@@ -9,7 +9,7 @@ gen_data <- function(nobs = 1000, K0 = 3, K = 30, J = 2) {
   # Setup dataframe
   SimDat <- as.data.frame(X)
   SimDat$y <- y
-  SimDat$Z <- Z
+  SimDat$Z <- as.matrix(Z)
   return(SimDat)
 }#GEN_DATA
 
@@ -26,6 +26,8 @@ test_that("kcmeans computes", {
 })#TEST_THAT
 
 test_that("kcmeans computes with additional controls", {
+  # Generate data
+  SimDat <- gen_data()
   # Get data from the included SimDat data
   y <- SimDat$y
   X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)
@@ -36,6 +38,8 @@ test_that("kcmeans computes with additional controls", {
 })#TEST_THAT
 
 test_that("predict.kcmeans computes w/ unseen categories", {
+  # Generate data
+  SimDat <- gen_data()
   # Get data from the included SimDat data
   y <- SimDat$y
   X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)
@@ -52,6 +56,8 @@ test_that("predict.kcmeans computes w/ unseen categories", {
 })#TEST_THAT
 
 test_that("predict.kcmeans does not scramble order", {
+  # Generate data
+  SimDat <- gen_data()
   # Get data from the included SimDat data
   y <- SimDat$y
   X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)

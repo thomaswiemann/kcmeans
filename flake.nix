@@ -4,6 +4,7 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   outputs = { self, nixpkgs, flake-utils }:
+  
     flake-utils.lib.eachDefaultSystem (system: let
       
       pkgs = nixpkgs.legacyPackages.${system};
@@ -14,6 +15,19 @@
         src = ./.;
         # kcmeans dependencies
         propagatedBuildInputs = with pkgs.rPackages; [Ckmeans_1d_dp MASS Matrix];
+      };
+
+      # Fetch ddml package from GitHub (until it's on CRAN)
+      ddml = pkgs.rPackages.buildRPackage {
+        name = "ddml";
+        src = pkgs.fetchFromGitHub {
+          owner = "thomaswiemann";
+          repo = "ddml";
+          rev = "abd373fb80404fe0eb0982dcdd436d9a8dbc6e3c";
+          sha256 = "nVcuUGWK2APqyxh2Ad/WV2Ue4QBhiwrgBK+a7zuuZUQ=";
+        };
+        # kcmeans dependencies
+        propagatedBuildInputs = with pkgs.rPackages; [AER MASS Matrix nnls quadprog glmnet ranger xgboost];
       };
 
       # R packages
@@ -32,6 +46,8 @@
         Ckmeans_1d_dp
         MASS
         Matrix
+        # Dependencies for vignettes only:
+        ddml
       ];
       my-R = [pkgs.R my-R-packages];
 
