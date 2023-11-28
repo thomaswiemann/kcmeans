@@ -1,4 +1,21 @@
-test_that("kcmenas computes", {
+gen_data <- function(nobs = 1000, K0 = 3, K = 30, J = 2) {
+  # Sample categorical variables
+  X <- matrix(rnorm(nobs * J), nobs, J)
+  Z <- sample(1:K, nobs, replace = T)
+  # Create the low-dimensional latent categorical variable
+  Z0 <- Z %% K0
+  # Draw outcome variables
+  y <- Z0 + rnorm(nobs)
+  # Setup dataframe
+  SimDat <- as.data.frame(X)
+  SimDat$y <- y
+  SimDat$Z <- Z
+  return(SimDat)
+}#GEN_DATA
+
+test_that("kcmeans computes", {
+  # Generate data
+  SimDat <- gen_data()
   # Get data from the included SimDat data
   y <- SimDat$y
   X <- SimDat$Z
@@ -8,20 +25,20 @@ test_that("kcmenas computes", {
   expect_equal(length(kcmeans_fit), 5)
 })#TEST_THAT
 
-test_that("kcmenas computes with additional controls", {
+test_that("kcmeans computes with additional controls", {
   # Get data from the included SimDat data
   y <- SimDat$y
-  X <- cbind(SimDat$Z, SimDat$X1, SimDat$X2)
+  X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)
   # Compute kcmeans
   kcmeans_fit <- kcmeans(y, X, K = 3)
   # Check output with expectations
   expect_equal(length(kcmeans_fit), 5)
 })#TEST_THAT
 
-test_that("predict.kcmenas computes w/ unseen categories", {
+test_that("predict.kcmeans computes w/ unseen categories", {
   # Get data from the included SimDat data
   y <- SimDat$y
-  X <- cbind(SimDat$Z, SimDat$X1, SimDat$X2)
+  X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)
   # Compute kcmeans
   kcmeans_fit <- kcmeans(y, X, K = 3)
   # Compute predictions w/ unseen categories
@@ -34,10 +51,10 @@ test_that("predict.kcmenas computes w/ unseen categories", {
   expect_equal(length(fitted_clusters), 1000)
 })#TEST_THAT
 
-test_that("predict.kcmenas does not scramble order", {
+test_that("predict.kcmeans does not scramble order", {
   # Get data from the included SimDat data
   y <- SimDat$y
-  X <- cbind(SimDat$Z, SimDat$X1, SimDat$X2)
+  X <- cbind(SimDat$Z, SimDat$V1, SimDat$V2)
   # Compute kcmeans
   kcmeans_fit <- kcmeans(y, X, K = 3)
   # Compute initial predicted clusters

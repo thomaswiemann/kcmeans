@@ -8,8 +8,19 @@
       
       pkgs = nixpkgs.legacyPackages.${system};
 
+      # Install local version of kcmeans
+      kcmeans = pkgs.rPackages.buildRPackage {
+        name = "kcmeans";
+        src = ./.;
+        # kcmeans dependencies
+        propagatedBuildInputs = with pkgs.rPackages; [Ckmeans_1d_dp MASS Matrix];
+      };
+
       # R packages
       my-R-packages = with pkgs.rPackages; [
+        # this package
+        kcmeans
+        # general development packages
         devtools
         pkgdown
         testthat
@@ -17,6 +28,7 @@
         knitr
         markdown
         rmarkdown
+        # Additional dependencies
         Ckmeans_1d_dp
         MASS
         Matrix
