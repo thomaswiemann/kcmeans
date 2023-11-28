@@ -32,6 +32,3 @@ reference:
   contents:
   - kcmeans
   - matches("predict")
-- title: Dataset
-  contents:
-  - SimDat
