@@ -43,7 +43,7 @@
 #' @examples
 #' # Simulate simple dataset with n=800 observations
 #' X <- rnorm(800) # continuous predictor
-#' Z <- sample(1:20, 800, replace = T) # categorical predictor
+#' Z <- sample(1:20, 800, replace = TRUE) # categorical predictor
 #' Z0 <- Z %% 4 # lower-dimensional latent categorical variable
 #' y <- Z0 + X + rnorm(800) # outcome
 #' # Compute kcmeans with four support points
@@ -113,7 +113,7 @@ kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
 #' @examples
 #' # Simulate simple dataset with n=800 observations
 #' X <- rnorm(800) # continuous predictor
-#' Z <- sample(1:20, 800, replace = T) # categorical predictor
+#' Z <- sample(1:20, 800, replace = TRUE) # categorical predictor
 #' Z0 <- Z %% 4 # lower-dimensional latent categorical variable
 #' y <- Z0 + X + rnorm(800) # outcome
 #' # Compute kcmeans with four support points
