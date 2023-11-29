@@ -75,8 +75,8 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>kcmeans</code> is an implementation of the K-Conditional-Means (KCMeans) regression estimator analyzed by Wiemann (2023) for conditional expectation function estimation using categorical features. The implementation leverages the unconditional KMeans implementation in one dimension using dynamic programming of the <a href="https://cran.r-project.org/web/packages/Ckmeans.1d.dp/index.html" class="external-link"><code>Ckmeans.1d.dp</code></a> package.</p>
-<p>See the working paper <a href="https://" class="external-link">Optimal Categorical Instrumental Variables</a> for further discussion of the KCMeans estimator.</p>
+<p><code>kcmeans</code> is an implementation of the K-Conditional-Means (KCMeans) regression estimator analyzed by Wiemann (2023; <a href="https://arxiv.org/abs/2311.17021" class="external-link">arxiv:2311.17021</a>) for conditional expectation function estimation using categorical features. The implementation leverages the unconditional KMeans implementation in one dimension using dynamic programming of the <a href="https://cran.r-project.org/web/packages/Ckmeans.1d.dp/index.html" class="external-link"><code>Ckmeans.1d.dp</code></a> package.</p>
+<p>See the working paper <a href="https://arxiv.org/abs/2311.17021" class="external-link">Optimal Categorical Instrumental Variables</a> for further discussion of the KCMeans estimator.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -109,7 +109,7 @@
 <span><span class="va">kcmeans_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kcmeans.html">kcmeans</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.800   0.044   0.755</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.696   0.019   0.637</span></span></code></pre></div>
 <p>We may now use the <code>predict.kcmeans</code> method to construct fitted values and/or compute predictions of the lower-dimensional latent categorical feature <code>Z0</code>. See also <code><a href="reference/predict.kcmeans.html">?predict.kcmeans</a></code> for details.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Predicted values for the outcome + R^2</span></span>
@@ -211,7 +211,7 @@
 <div class="section level1">
 <h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h1>
-<p>Wiemann T (2023). “Optimal Categorical Instruments.”</p>
+<p>Wiemann T (2023). “Optimal Categorical Instruments.” <a href="https://arxiv.org/abs/2311.17021" class="external-link uri">https://arxiv.org/abs/2311.17021</a></p>
 </div>
 
   </main><aside class="col-md-3"><div class="links">

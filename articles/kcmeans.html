@@ -114,54 +114,54 @@ feature <code>Z</code>. See also <code><a href="../reference/kcmeans.html">?kcme
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">kcmeans_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kcmeans.html">kcmeans</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.019   0.000   0.016</span></span></code></pre></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##    user  system elapsed </span></span>
+<span><span class="co">##   0.784   0.027   0.668</span></span></code></pre>
 <p>We may now use the <code>predict.kcmeans</code> method to construct
 fitted values and/or compute predictions of the lower-dimensional latent
 categorical feature <code>Z0</code>. See also
 <code><a href="../reference/predict.kcmeans.html">?predict.kcmeans</a></code> for details.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Predicted values for the outcome + R^2</span></span>
 <span><span class="va">y_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">kcmeans_fit</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">y_hat</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.695</span></span>
-<span></span>
-<span><span class="co"># Predicted values for the latent categorical feature + missclassification rate</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">y_hat</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0.695</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Predicted values for the latent categorical feature + missclassification rate</span></span>
 <span><span class="va">Z0_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">kcmeans_fit</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span>, clusters <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">Z0</span> <span class="op">-</span> <span class="va">Z0_hat</span><span class="op">)</span><span class="op">!=</span><span class="fl">0</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">Z0</span> <span class="op">-</span> <span class="va">Z0_hat</span><span class="op">)</span><span class="op">!=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0</span></span></code></pre>
 <p>Finally, it is also straightforward to compute standard errors for
 the final coefficients, e.g., using <code>summary.lm</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the linear regression object and call summary.lm</span></span>
 <span><span class="va">lm_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Z0_hat</span><span class="op">)</span> <span class="op">+</span> <span class="va">X</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_fit</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; lm(formula = y ~ as.factor(Z0_hat) + X)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Residuals:</span></span>
-<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">#&gt; -3.1205 -0.6916  0.0544  0.6700  3.4201 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Coefficients:</span></span>
-<span><span class="co">#&gt;                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">#&gt; (Intercept)         0.03897    0.07434   0.524      0.6    </span></span>
-<span><span class="co">#&gt; as.factor(Z0_hat)1  0.88393    0.10265   8.611   &lt;2e-16 ***</span></span>
-<span><span class="co">#&gt; as.factor(Z0_hat)2  1.88314    0.10271  18.334   &lt;2e-16 ***</span></span>
-<span><span class="co">#&gt; as.factor(Z0_hat)3  3.01094    0.10636  28.310   &lt;2e-16 ***</span></span>
-<span><span class="co">#&gt; X                   1.04636    0.03541  29.549   &lt;2e-16 ***</span></span>
-<span><span class="co">#&gt; ---</span></span>
-<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Residual standard error: 1.03 on 795 degrees of freedom</span></span>
-<span><span class="co">#&gt; Multiple R-squared:  0.6954, Adjusted R-squared:  0.6939 </span></span>
-<span><span class="co">#&gt; F-statistic: 453.7 on 4 and 795 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_fit</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## lm(formula = y ~ as.factor(Z0_hat) + X)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">## -3.1205 -0.6916  0.0544  0.6700  3.4201 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##                    Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)         0.03897    0.07434   0.524      0.6    </span></span>
+<span><span class="co">## as.factor(Z0_hat)1  0.88393    0.10265   8.611   &lt;2e-16 ***</span></span>
+<span><span class="co">## as.factor(Z0_hat)2  1.88314    0.10271  18.334   &lt;2e-16 ***</span></span>
+<span><span class="co">## as.factor(Z0_hat)3  3.01094    0.10636  28.310   &lt;2e-16 ***</span></span>
+<span><span class="co">## X                   1.04636    0.03541  29.549   &lt;2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 1.03 on 795 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.6954, Adjusted R-squared:  0.6939 </span></span>
+<span><span class="co">## F-statistic: 453.7 on 4 and 795 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>Wiemann T (2023). “Optimal Categorical Instruments.”</p>
+<p>Wiemann T (2023). “Optimal Categorical Instruments.” <a href="https://arxiv.org/abs/2311.17021" class="external-link uri">https://arxiv.org/abs/2311.17021</a></p>
 </div>
   </main>
 </div>
