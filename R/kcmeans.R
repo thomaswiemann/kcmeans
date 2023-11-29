@@ -36,7 +36,7 @@
 #' Wang H and Song M (2011). "Ckmeans.1d.dp: optimal k-means clustering in one
 #'     dimension by dynamic programming." The R Journal 3(2), 29--33.
 #'
-#' Wiemann T (2023). "Optimal Categorical Instruments."
+#' Wiemann T (2023). "Optimal Categorical Instruments." https://arxiv.org/abs/2311.17021
 #'
 #' @export
 #'
@@ -106,7 +106,7 @@ kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
 #'     or predicted clusters (if \code{clusters = FALSE}).
 #'
 #' @references
-#' Wiemann T (2023). "Optimal Categorical Instruments."
+#' Wiemann T (2023). "Optimal Categorical Instruments." https://arxiv.org/abs/2311.17021
 #'
 #' @export
 #'

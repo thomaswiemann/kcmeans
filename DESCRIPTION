@@ -5,7 +5,11 @@ Date: 2023-10-27
 Authors@R: c(
     person("Thomas", "Wiemann", role = c("aut", "cre"), email = "wiemann@uchicago.edu"))
 Description: Implementation of the KCMeans regression estimator studied by 
-    Wiemann (2023).
+    Wiemann (2023) for expectation function estimation conditional on 
+    categorical variables. Computation leverages the unconditional KMeans 
+    implementation in one dimension using dynamic programming algorithm of
+    Wang and Song (2011), allowing for global solutions in time ploynomial in 
+    the number of observed categories.
 License: GPL (>= 3)
 URL: https://github.com/thomaswiemann/kcmeans
 BugReports: https://github.com/thomaswiemann/kcmeans/issues

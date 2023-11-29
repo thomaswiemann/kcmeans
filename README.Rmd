@@ -19,9 +19,9 @@ knitr::opts_chunk$set(
 [![CodeFactor](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans/badge)](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans)
 <!-- badges: end -->
 
-``kcmeans`` is an implementation of the K-Conditional-Means (KCMeans) regression estimator analyzed by Wiemann (2023) for conditional expectation function estimation using categorical features. The implementation leverages the unconditional KMeans implementation in one dimension using dynamic programming of the [``Ckmeans.1d.dp``](https://cran.r-project.org/web/packages/Ckmeans.1d.dp/index.html) package.
+``kcmeans`` is an implementation of the K-Conditional-Means (KCMeans) regression estimator analyzed by Wiemann (2023; [arxiv:2311.17021](https://arxiv.org/abs/2311.17021)) for conditional expectation function estimation using categorical features. The implementation leverages the unconditional KMeans implementation in one dimension using dynamic programming of the [``Ckmeans.1d.dp``](https://cran.r-project.org/web/packages/Ckmeans.1d.dp/index.html) package.
 
-See the working paper [Optimal Categorical Instrumental Variables](https://) for further discussion of the KCMeans estimator.
+See the working paper [Optimal Categorical Instrumental Variables](https://arxiv.org/abs/2311.17021) for further discussion of the KCMeans estimator.
 
 ## Installation
 
@@ -142,4 +142,4 @@ names(which.min(cv_res$mspe))
 ```
 
 # References
-Wiemann T (2023). "Optimal Categorical Instruments."
+Wiemann T (2023). "Optimal Categorical Instruments." https://arxiv.org/abs/2311.17021

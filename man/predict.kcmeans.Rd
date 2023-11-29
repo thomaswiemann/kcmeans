@@ -39,5 +39,5 @@ clusters <- predict(kcmeans_fit, cbind(Z, X), clusters = TRUE)
 table(clusters)
 }
 \references{
-Wiemann T (2023). "Optimal Categorical Instruments."
+Wiemann T (2023). "Optimal Categorical Instruments." https://arxiv.org/abs/2311.17021
 }

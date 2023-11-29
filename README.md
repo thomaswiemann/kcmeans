@@ -11,7 +11,8 @@
 <!-- badges: end -->
 
 `kcmeans` is an implementation of the K-Conditional-Means (KCMeans)
-regression estimator analyzed by Wiemann (2023) for conditional
+regression estimator analyzed by Wiemann (2023;
+[arxiv:2311.17021](https://arxiv.org/abs/2311.17021)) for conditional
 expectation function estimation using categorical features. The
 implementation leverages the unconditional KMeans implementation in one
 dimension using dynamic programming of the
@@ -19,7 +20,8 @@ dimension using dynamic programming of the
 package.
 
 See the working paper [Optimal Categorical Instrumental
-Variables](https://) for further discussion of the KCMeans estimator.
+Variables](https://arxiv.org/abs/2311.17021) for further discussion of
+the KCMeans estimator.
 
 ## Installation
 
@@ -69,7 +71,7 @@ system.time({
 kcmeans_fit <- kcmeans(y = y, X = cbind(Z, X), K = 4)
 })
 #>    user  system elapsed 
-#>   0.800   0.044   0.755
+#>   0.696   0.019   0.637
 ```
 
 We may now use the `predict.kcmeans` method to construct fitted values
@@ -192,3 +194,4 @@ names(which.min(cv_res$mspe))
 # References
 
 Wiemann T (2023). “Optimal Categorical Instruments.”
+<https://arxiv.org/abs/2311.17021>
