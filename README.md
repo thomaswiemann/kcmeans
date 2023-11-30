@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/thomaswiemann/kcmeans/graph/badge.svg?token=1U0XDRMKEP)](https://app.codecov.io/gh/thomaswiemann/kcmeans)
 [![CodeFactor](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans/badge)](https://www.codefactor.io/repository/github/thomaswiemann/kcmeans)
+[![CRAN
+Version](https://www.r-pkg.org/badges/version/kcmeans)](https://cran.r-project.org/package=kcmeans)
 <!-- badges: end -->
 
 `kcmeans` is an implementation of the K-Conditional-Means (KCMeans)
@@ -77,7 +79,7 @@ system.time({
 kcmeans_fit <- kcmeans(y = y, X = cbind(Z, X), K = 4)
 })
 #>    user  system elapsed 
-#>    1.23    0.05    1.29
+#>    1.19    0.12    2.11
 ```
 
 We may now use the `predict.kcmeans` method to construct fitted values
