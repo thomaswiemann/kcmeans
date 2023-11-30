@@ -34,6 +34,11 @@ if (!require("devtools")) {
 devtools::install_github("thomaswiemann/kcmeans", dependencies = TRUE)
 ```
 
+Install the latest public release from CRAN:
+```{r, eval = FALSE}
+install.packages("kcmeans")
+```
+
 ## Usage
 
 To illustrate ``kcmeans``, consider simulating a small dataset with a continuous outcome variable ``y``, two observed predictors -- a categorical variable ``Z`` and a continuous variable ``X`` -- and an (unobserved) Gaussian error. As in Wiemann (2023), the reduced form has an unobserved lower-dimensional representation dependent on the latent categorical variable ``Z0``.

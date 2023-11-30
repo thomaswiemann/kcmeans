@@ -35,6 +35,12 @@ if (!require("devtools")) {
 devtools::install_github("thomaswiemann/kcmeans", dependencies = TRUE)
 ```
 
+Install the latest public release from CRAN:
+
+``` r
+install.packages("kcmeans")
+```
+
 ## Usage
 
 To illustrate `kcmeans`, consider simulating a small dataset with a
@@ -71,7 +77,7 @@ system.time({
 kcmeans_fit <- kcmeans(y = y, X = cbind(Z, X), K = 4)
 })
 #>    user  system elapsed 
-#>    1.09    0.04    1.14
+#>    1.23    0.05    1.29
 ```
 
 We may now use the `predict.kcmeans` method to construct fitted values
