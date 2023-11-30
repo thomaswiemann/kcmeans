@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">kcmeans</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,12 +86,15 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"thomaswiemann/kcmeans"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>Install the latest public release from CRAN:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"kcmeans"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>To illustrate <code>kcmeans</code>, consider simulating a small dataset with a continuous outcome variable <code>y</code>, two observed predictors – a categorical variable <code>Z</code> and a continuous variable <code>X</code> – and an (unobserved) Gaussian error. As in Wiemann (2023), the reduced form has an unobserved lower-dimensional representation dependent on the latent categorical variable <code>Z0</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomaswiemann/kcmeans" class="external-link">kcmeans</a></span><span class="op">)</span></span>
 <span><span class="co"># Set seed</span></span>
@@ -104,14 +107,14 @@
 <span><span class="va">Z0</span> <span class="op">&lt;-</span> <span class="va">Z</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span> <span class="fl">4</span> <span class="co"># lower-dimensional latent categorical variable</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">Z0</span> <span class="op">+</span> <span class="va">X</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">nobs</span><span class="op">)</span></span></code></pre></div>
 <p><code>kcmeans</code> is then computed by combining the categorical feature with the continuous feature. By default, the categorical feature is the first column. Alternatively, the column corresponding to the categorical feature can be set via the <code>which_is_cat</code> argument. Computation is <em>very</em> quick – indeed the dynamic programming algorithm of the leveraged <code>Ckmeans.1d.dp</code> package is polynomial in the number of values taken by the categorical feature <code>Z</code>. See also <code><a href="reference/kcmeans.html">?kcmeans</a></code> for details.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">kcmeans_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kcmeans.html">kcmeans</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span>, K <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    1.09    0.04    1.14</span></span></code></pre></div>
+<span><span class="co">#&gt;    1.19    0.12    2.11</span></span></code></pre></div>
 <p>We may now use the <code>predict.kcmeans</code> method to construct fitted values and/or compute predictions of the lower-dimensional latent categorical feature <code>Z0</code>. See also <code><a href="reference/predict.kcmeans.html">?predict.kcmeans</a></code> for details.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Predicted values for the outcome + R^2</span></span>
 <span><span class="va">y_hat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">kcmeans_fit</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Z</span>, <span class="va">X</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="va">y_hat</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
@@ -122,7 +125,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">Z0</span> <span class="op">-</span> <span class="va">Z0_hat</span><span class="op">)</span><span class="op">!=</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 <p>Finally, it is also straightforward to compute standard errors for the final coefficients, e.g., using <code>summary.lm</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute the linear regression object and call summary.lm</span></span>
 <span><span class="va">lm_fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">Z0_hat</span><span class="op">)</span> <span class="op">+</span> <span class="va">X</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_fit</span><span class="op">)</span></span>
@@ -158,7 +161,7 @@
 <li>Lasso with cross-validated penalty parameter (see also <code>?ddml::mdl_glmnet</code>)</li>
 <li>Ridge with cross-validated penalty parameter</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load the ddml package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/thomaswiemann/ddml" class="external-link">ddml</a></span><span class="op">)</span></span>
 <span></span>
@@ -193,7 +196,7 @@
 <span>                   learners <span class="op">=</span> <span class="va">learner_list</span>, </span>
 <span>                   cv_folds <span class="op">=</span> <span class="fl">20</span>, silent <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p>The results show that KCMeans with K=4 and K=6 achieve the smallest MSPE among the considered estimators.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Print the results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cv_res</span><span class="op">$</span><span class="va">mspe</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"KCMeans (K=2)"</span>, <span class="st">"KCMeans (K=4)"</span>, <span class="st">"KCMeans (K=6)"</span>,</span>
 <span>                        <span class="st">"OLS"</span>, <span class="st">"Lasso"</span>, <span class="st">"Ridge"</span><span class="op">)</span></span>
@@ -251,6 +254,7 @@
 <li><a href="https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/thomaswiemann/kcmeans/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/thomaswiemann/kcmeans" class="external-link"><img src="https://codecov.io/gh/thomaswiemann/kcmeans/graph/badge.svg?token=1U0XDRMKEP" alt="codecov"></a></li>
 <li><a href="https://www.codefactor.io/repository/github/thomaswiemann/kcmeans" class="external-link"><img src="https://www.codefactor.io/repository/github/thomaswiemann/kcmeans/badge" alt="CodeFactor"></a></li>
+<li><a href="https://cran.r-project.org/package=kcmeans" class="external-link"><img src="https://www.r-pkg.org/badges/version/kcmeans" alt="CRAN Version"></a></li>
 </ul>
 </div>
 
