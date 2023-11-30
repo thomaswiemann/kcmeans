@@ -58,5 +58,5 @@ print(unique(kcmeans_fit$cluster_map[, "mean_xK"]))
 Wang H and Song M (2011). "Ckmeans.1d.dp: optimal k-means clustering in one
 dimension by dynamic programming." The R Journal 3(2), 29--33.
 
-Wiemann T (2023). "Optimal Categorical Instruments." https://arxiv.org/abs/2311.17021
+Wiemann T (2023). "Optimal Categorical Instruments." \url{https://arxiv.org/abs/2311.17021}
 }

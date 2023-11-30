@@ -1,20 +1,19 @@
 Package: kcmeans
 Title: Conditional Expectation Function Estimation with K-Conditional-Means
-Version: 0.0.0.9000
-Date: 2023-10-27
+Version: 0.1.0.9000
+Date: 2023-11-28
 Authors@R: c(
     person("Thomas", "Wiemann", role = c("aut", "cre"), email = "wiemann@uchicago.edu"))
 Description: Implementation of the KCMeans regression estimator studied by 
-    Wiemann (2023) for expectation function estimation conditional on 
+    Wiemann (2023) <arXiv:2311.17021> for expectation function estimation conditional on 
     categorical variables. Computation leverages the unconditional KMeans 
     implementation in one dimension using dynamic programming algorithm of
-    Wang and Song (2011), allowing for global solutions in time ploynomial in 
+    Wang and Song (2011) <doi:10.32614/RJ-2011-015>, allowing for global solutions in time polynomial in 
     the number of observed categories.
 License: GPL (>= 3)
 URL: https://github.com/thomaswiemann/kcmeans
 BugReports: https://github.com/thomaswiemann/kcmeans/issues
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
