@@ -82,7 +82,6 @@ kcmeans <- function(y, X, which_is_cat = 1, K = 2) {
   # Compute the unconditional mean
   mean_y <- mean(y)
   # Prepare and return the model fit object
-  X = cbind(X[, 1:which_is_cat])
   mdl_fit <- list(cluster_map = cluster_map,
                   mean_y = mean_y, pi = pi,
                   which_is_cat = which_is_cat,
